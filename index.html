@@ -546,12 +546,14 @@
             <div class="form-group">
                 <label class="form-label">VIN String:</label>
                 <input type="text"
-                        id="vin-input"
-                        class="form-input"
-                        placeholder="Enter full VIN string or scan QR..."
-                        onkeyup="handleVinInput(event)"
-                        readonly
-                        inputmode="none">
+                    id="vin-input"
+                    class="form-input"
+                    placeholder="Enter full VIN string or scan QR..."
+                    onkeyup="handleVinInput(event)"
+                    inputmode="none"
+                    autocomplete="off"
+                    autocorrect="off"
+                    spellcheck="false">
             </div>
 
             <!-- QR Scanner Section -->
@@ -2073,15 +2075,11 @@
             setTimeout(() => {
                 const vinInput = document.getElementById('vin-input');
 
-                // Temporarily allow scanner input
-                vinInput.removeAttribute('readonly');
-
                 vinInput.focus();
 
-                // Prevent manual typing keyboard popup
-                setTimeout(() => {
-                    vinInput.setAttribute('readonly', true);
-                }, 100);
+                // Move cursor to end
+                const length = vinInput.value.length;
+                vinInput.setSelectionRange(length, length);
 
             }, 100);
         }
